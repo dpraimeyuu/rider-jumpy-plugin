@@ -6,9 +6,10 @@
 
 A quick cursor navigation plugin for JetBrains Rider, inspired by VSCode's Jumpy extension. Navigate to any visible word using two-letter combinations.
 
-## Demo
+## Demonstration
+[rider-example.webm](https://github.com/user-attachments/assets/2f2d3dd7-e80e-47ab-a856-e10c031aaa7e)
 
-https://github.com/user-attachments/assets/jumpy-demo.webm
+<img width="707" height="735" alt="rider-example" src="https://github.com/user-attachments/assets/4389848b-fb33-4ade-848c-9e06cceeec78" />
 
 **How it works:**
 1. Press `Shift+Enter` to activate jumpy mode
