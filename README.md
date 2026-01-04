@@ -6,6 +6,17 @@
 
 A quick cursor navigation plugin for JetBrains Rider, inspired by VSCode's Jumpy extension. Navigate to any visible word using two-letter combinations.
 
+## Demo
+
+![Jumpy Plugin in Action](.github/images/jumpy-demo.png)
+
+**How it works:**
+1. Press `Shift+Enter` to activate jumpy mode
+2. Two-letter labels appear at the start of each word (highlighted in yellow)
+3. Type a combination like `aq`, `bb`, or `cs` to instantly jump to that location
+4. Labels turn orange as you type to show matches
+5. Your cursor jumps instantly - no characters are typed into your file
+
 ## Features
 
 - **Fast Navigation**: Jump to any visible word with just two keystrokes
