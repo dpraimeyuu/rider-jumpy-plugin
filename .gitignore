@@ -1,0 +1,23 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+*.zip
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
