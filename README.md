@@ -8,7 +8,7 @@ A quick cursor navigation plugin for JetBrains Rider, inspired by VSCode's Jumpy
 
 ## Demo
 
-![Jumpy Plugin in Action](.github/images/jumpy-demo.png)
+https://github.com/user-attachments/assets/jumpy-demo.webm
 
 **How it works:**
 1. Press `Shift+Enter` to activate jumpy mode
