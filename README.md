@@ -1,5 +1,9 @@
 # Jumpy Plugin for Rider
 
+[![Build](https://github.com/dpraimeyuu/rider-jumpy-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/dpraimeyuu/rider-jumpy-plugin/actions/workflows/build.yml)
+[![Code Quality](https://github.com/dpraimeyuu/rider-jumpy-plugin/actions/workflows/code-quality.yml/badge.svg)](https://github.com/dpraimeyuu/rider-jumpy-plugin/actions/workflows/code-quality.yml)
+[![Release](https://github.com/dpraimeyuu/rider-jumpy-plugin/actions/workflows/release.yml/badge.svg)](https://github.com/dpraimeyuu/rider-jumpy-plugin/actions/workflows/release.yml)
+
 A quick cursor navigation plugin for JetBrains Rider, inspired by VSCode's Jumpy extension. Navigate to any visible word using two-letter combinations.
 
 ## Features

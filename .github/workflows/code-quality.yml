@@ -1,0 +1,43 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'gradle'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Run plugin verification
+      run: ./gradlew verifyPlugin
+
+    - name: Check plugin configuration
+      run: ./gradlew verifyPluginConfiguration
+
+    - name: IntelliJ Plugin Verifier
+      run: ./gradlew runPluginVerifier
+      continue-on-error: true
+
+    - name: Upload verification report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: verification-report
+        path: build/reports/
+        retention-days: 7

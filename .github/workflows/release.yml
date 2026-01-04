@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'gradle'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build plugin
+      run: ./gradlew buildPlugin
+
+    - name: Get version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Release ${{ steps.get_version.outputs.VERSION }}
+        body: |
+          ## Rider Jumpy Plugin v${{ steps.get_version.outputs.VERSION }}
+
+          ### Installation
+          1. Download `rider-jumpy-plugin-${{ steps.get_version.outputs.VERSION }}.zip`
+          2. Open Rider → Settings → Plugins
+          3. Click ⚙️ → Install Plugin from Disk...
+          4. Select the downloaded ZIP file
+          5. Restart Rider
+
+          ### Usage
+          - Press `Shift+Enter` to activate jumpy mode
+          - Type a two-letter combination to jump to that position
+          - Press `ESC` to cancel
+
+          Full changelog: https://github.com/${{ github.repository }}/commits/v${{ steps.get_version.outputs.VERSION }}
+        files: |
+          build/distributions/*.zip
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

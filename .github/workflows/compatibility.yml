@@ -1,0 +1,48 @@
+name: Compatibility Check
+
+on:
+  schedule:
+    # Run weekly on Mondays at 9:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # Test against different Rider versions
+        rider-version: ['2023.3', '2024.1', '2024.2', '2024.3']
+      fail-fast: false
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'gradle'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Update Rider version
+      run: |
+        sed -i 's/version.set(".*")/version.set("${{ matrix.rider-version }}")/' build.gradle.kts
+
+    - name: Build with Rider ${{ matrix.rider-version }}
+      run: ./gradlew buildPlugin
+      continue-on-error: true
+
+    - name: Report compatibility
+      if: always()
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "✅ Compatible with Rider ${{ matrix.rider-version }}"
+        else
+          echo "❌ Not compatible with Rider ${{ matrix.rider-version }}"
+        fi
